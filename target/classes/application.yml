@@ -1,0 +1,45 @@
+mserver:
+  port: 9000
+spring:
+  application:
+    name: cruncher
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/dbTest?useUnicode=true&characterEncoding=utf8
+    username: root
+  redis:
+    cluster:
+      nodes:
+      - 127.0.0.1:6380
+      - 127.0.0.1:6381
+      - 127.0.0.1:6382
+      - 127.0.0.1:6383
+      - 127.0.0.1:6384
+      - 127.0.0.1:6385
+    
+    timeout:
+      5000
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      cluster-nodes: 127.0.0.1:9300
+mybatis-plus:
+  
+  configuration:
+    global-config:
+      db-config:
+        id-type: auto
+
+
+
+
+
+
+
+
+
+
+
+server:
+  port: 8001
