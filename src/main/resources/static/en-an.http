@@ -5,3 +5,22 @@
 # * 'gtrp' and 'gtr' create a GET request with or without query parameters;
 # * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
 # * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+
+# curl -X GET "localhost:9200/_analyze?pretty" -H 'Content-Type: application/json' -d'
+#{
+#  "analyzer" : "standard",
+#  "text" : "this is a test"
+#}
+#'
+POST localhost:9200/_analyze?pretty
+Content-Type: application/json
+
+
+{
+  "analyzer": "ik_max_word",
+  "text": "中华人民共和国"
+}
+
+
+###
+
