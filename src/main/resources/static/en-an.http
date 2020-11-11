@@ -24,3 +24,15 @@ Content-Type: application/json
 
 ###
 
+GET  localhost:9200/item/_doc/1/_termvectors?pretty=true
+
+###
+
+# curl -X GET "localhost:9200/my-index-000001/_termvectors/1?pretty"
+GET localhost:9200/my-index-000001/_termvectors/1?pretty
+
+###
+
+GET  localhost:9200/item/_termvectors/1/?fields=title&pretty=true
+
+###
