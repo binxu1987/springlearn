@@ -36,3 +36,22 @@ GET localhost:9200/my-index-000001/_termvectors/1?pretty
 GET  localhost:9200/item/_termvectors/1/?fields=title&pretty=true
 
 ###
+
+# curl -X PUT "localhost:9200/customer/_doc/1?pretty" -H 'Content-Type: application/json' -d'
+#{
+#  "name": "John Doe"
+#}
+#'
+POST localhost:9200/customer/_doc/1?pretty
+Content-Type: application/json
+
+
+{
+  "name": "John Doe"
+}
+
+
+###
+GET localhost:9200/_cat/indices?v
+
+###
