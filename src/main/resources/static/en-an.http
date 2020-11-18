@@ -146,3 +146,17 @@ Content-Type: application/json
 }
 
 ###
+http://localhost:9200/_license
+
+###
+
+POST localhost:9200/_license/start_trial?acknowledge=true&pretty
+Content-Type: application/json
+
+{
+  "acknowledged" : true,
+  "trial_was_started" : true,
+  "type" : "trial"
+}
+
+###
