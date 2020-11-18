@@ -160,3 +160,30 @@ Content-Type: application/json
 }
 
 ###
+
+POST  localhost:9200/bank/_doc/_search?size=0&pretty
+Content-Type: application/json
+
+{
+  "aggs": {
+    "gender_xubin": {
+      "range": {
+        "field": "age",
+        "ranges": [
+          {"to": 20},
+          {
+          "from": 20,
+            "to": 30
+          },{
+            "from": 30,
+            "to": 40
+          },{
+            "from": 40
+          }
+        ]
+      }
+    }
+  }
+}
+
+###
