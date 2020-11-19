@@ -221,3 +221,29 @@ Content-Type: application/json
 }
 
 ###
+
+POST  localhost:9200/bank/_doc/_search?size=0&pretty
+Content-Type: application/json
+
+{
+"query": {
+  "match": {
+    "gender": "F"
+  }
+},
+  "aggs": {
+    "all_docms": {
+      "global": {},
+      "aggs": {
+        "gender_xubin": {
+          "terms": {
+            "field": "gender.keyword"
+          }
+        }
+      }
+    }
+  }
+
+}
+
+###
