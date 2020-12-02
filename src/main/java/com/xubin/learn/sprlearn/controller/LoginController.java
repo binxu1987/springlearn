@@ -1,8 +1,11 @@
 package com.xubin.learn.sprlearn.controller;
 
 import com.xubin.learn.sprlearn.dao.ItemRepository;
+import com.xubin.learn.sprlearn.dao.SysAreaMapper;
+import com.xubin.learn.sprlearn.dao.SysAreaRepository;
 import com.xubin.learn.sprlearn.entity.Item;
 import com.xubin.learn.sprlearn.entity.Product;
+import com.xubin.learn.sprlearn.entity.SysArea;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,14 +23,27 @@ public class LoginController {
 
 	@Autowired
 	private ItemRepository itemRepository;
+
+    @Autowired
+    private SysAreaRepository sysAreaRepository;
+
+    @Autowired
+    private SysAreaMapper sysAreaMapper;
+
 	@ResponseBody
 	@RequestMapping("/admin")
 	public String getAdmin() {
+
+	    List<SysArea>  areaList=sysAreaMapper.getAll();
+        sysAreaRepository.saveAll(areaList);
+
 		List<Product> pdlist=new ArrayList<>();
 		Product p1=new Product(1L,"xubin1",1L);
 		Product p2=new Product(2L,"xubin2",2L);
+        Product p3=new Product(3L,"xubin2",3L);
 		pdlist.add(p1);
 		pdlist.add(p2);
+		pdlist.add(p3);
 		Item item = new Item(1L, "小米手机7", "手机",
 				"小米", 3499.00, "http://image.baidu.com/13123.jpg",pdlist);
 		itemRepository.save(item);
