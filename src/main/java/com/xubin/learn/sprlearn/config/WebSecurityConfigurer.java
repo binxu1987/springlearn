@@ -1,12 +1,8 @@
 package com.xubin.learn.sprlearn.config;
 
-import java.io.IOException;
-import java.util.Arrays;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.alibaba.nacos.api.config.annotation.NacosValue;
+import com.xubin.learn.sprlearn.dao.MyAuthenticationProvider;
+import com.xubin.learn.sprlearn.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -26,8 +22,11 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.xubin.learn.sprlearn.dao.MyAuthenticationProvider;
-import com.xubin.learn.sprlearn.service.MyUserDetailsService;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Arrays;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled=true)
@@ -41,11 +40,13 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private PersistentTokenRepository  myPersistentTokenRepository;
-	
-	
+
+    @NacosValue(value = "${xubin:false}", autoRefreshed = true)
+    private String nacosPV;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+        System.out.println("==水边测=="+nacosPV);
 		http.cors().and().authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN")
 		                                     .antMatchers("/user/**").hasRole("USER").anyRequest().authenticated()
 		                                     .and().formLogin().loginPage("/sprlearnLogin.html")

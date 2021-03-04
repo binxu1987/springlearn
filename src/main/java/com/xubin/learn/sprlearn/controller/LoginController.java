@@ -1,5 +1,6 @@
 package com.xubin.learn.sprlearn.controller;
 
+import com.alibaba.nacos.api.config.annotation.NacosValue;
 import com.xubin.learn.sprlearn.dao.ItemRepository;
 import com.xubin.learn.sprlearn.dao.SysAreaMapper;
 import com.xubin.learn.sprlearn.dao.SysAreaRepository;
@@ -30,6 +31,10 @@ public class LoginController {
     @Autowired
     private SysAreaMapper sysAreaMapper;
 
+    @NacosValue(value = "${xubin:false}", autoRefreshed = true)
+    private String nacosPV;
+
+
 	@ResponseBody
 	@RequestMapping("/admin")
 	public String getAdmin() {
@@ -58,6 +63,9 @@ public class LoginController {
 	@ResponseBody
 	@RequestMapping("/user")
 	public String getUser(String username,String password) {
+
+	    System.out.println("===="+nacosPV);
+
 	  return "user";
 	}
 	
